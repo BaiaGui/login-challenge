@@ -3,7 +3,6 @@ import { Submit } from "../Components/Submit";
 import Icon from "../assets/ConsulTIIcone.png";
 import { Input } from "../Components/Input";
 import { useEffect, useRef, useState } from "react";
-import { ErrorPopUp } from "../Components/ErrorPopUp";
 
 export function SignUpPage() {
   const [userData, setUserData] = useState();
@@ -47,7 +46,11 @@ export function SignUpPage() {
         <img src={Icon} alt="ConsulTI Logo" width="50px" />
       </nav>
       <form onSubmit={handleSubmit} className="flex flex-col items-center px-10 py-8 w-fit gap-3">
-        {errorState && <ErrorPopUp>{errorState.message}</ErrorPopUp>}
+        {errorState && (
+          <div className="bg-red-200 border border-red-600 w-full py-6 text-center text-red-700">
+            {errorState.message}
+          </div>
+        )}
         <h1 className="text-5xl font-bold mb-10">Fazer Cadastro</h1>
         <Input placeholder="Usuário" name="username" type="text" isFirst={true} />
         <Input placeholder="Email" name="email" type="email" />
