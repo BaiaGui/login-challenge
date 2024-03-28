@@ -50,11 +50,7 @@ export function LoginPage() {
         <img src={Icon} alt="ConsulTI Logo" width="50px" />
       </nav>
       <form onSubmit={handleSubmit} className="flex flex-col items-center px-10 py-8 w-96 gap-3">
-        {errorState && (
-          <div className="bg-red-200 border border-red-600 w-full py-6 text-center text-red-700">
-            {errorState.message}
-          </div>
-        )}
+        {errorState && <ErrorMessage message={errorState.message} />}
         <h1 className="text-5xl font-bold mb-10">Fazer Login</h1>
         <Input placeholder="Email" name="email" type="email" isFirst={true} loading={loadingState} />
         <Input placeholder="Senha" name="password" type="password" loading={loadingState} />
