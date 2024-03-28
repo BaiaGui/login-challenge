@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 export function SignUpPage() {
   const [userData, setUserData] = useState();
   const [errorState, setErrorState] = useState();
+  const [loadingState, setLoadingState] = useState(false);
   const didFirstPaint = useRef(false);
   const navigate = useNavigate();
 
@@ -16,6 +17,7 @@ export function SignUpPage() {
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
     setUserData(formJson);
+    setLoadingState(true);
   }
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export function SignUpPage() {
       const jsonResponse = await response.json();
       if (response.status != 200) {
         setErrorState(jsonResponse);
+        setLoadingState(false);
       } else {
         console.log(jsonResponse);
         return navigate("/");
@@ -52,10 +55,10 @@ export function SignUpPage() {
           </div>
         )}
         <h1 className="text-5xl font-bold mb-10">Fazer Cadastro</h1>
-        <Input placeholder="Usuário" name="username" type="text" isFirst={true} />
-        <Input placeholder="Email" name="email" type="email" />
-        <Input placeholder="Senha" name="password" type="password" />
-        <Submit>Enviar</Submit>
+        <Input placeholder="Usuário" name="username" type="text" isFirst={true} loading={loadingState} />
+        <Input placeholder="Email" name="email" type="email" loading={loadingState} />
+        <Input placeholder="Senha" name="password" type="password" loading={loadingState} />
+        <Submit loading={loadingState}>{loadingState ? "Enviando..." : "Entrar"}</Submit>
         <Link to="/" className="text-sm mt-20 text-stone-500 hover:underline outline-none focus:ring-2">
           Já possui uma conta? Fazer login
         </Link>
