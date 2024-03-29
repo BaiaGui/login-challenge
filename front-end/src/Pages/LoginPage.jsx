@@ -46,13 +46,13 @@ export function LoginPage() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
-      <nav className="w-full h-fit px-48 py-5 absolute top-0">
+    <div className="w-full h-screen flex flex-col justify-center items-center p-3">
+      <nav className="hidden sm:block w-full h-fit px-48 py-5 absolute top-0">
         <img src={Icon} alt="ConsulTI Logo" width="50px" />
       </nav>
-      <form onSubmit={handleSubmit} className="flex flex-col items-center px-10 py-8 w-96 gap-3">
+      <form onSubmit={handleSubmit} className="flex flex-col items-center md:px-10 py-8 max-w-96 sm:w-96 gap-3">
         {errorState && <ErrorMessage message={errorState.message} />}
-        <h1 className="text-5xl font-bold mb-10">Fazer Login</h1>
+        <h1 className="text-5xl font-bold mb-10 text-center">Fazer Login</h1>
         <Input placeholder="Email" name="email" type="email" isFirst={true} loading={loadingState} />
         <Input placeholder="Senha" name="password" type="password" loading={loadingState} />
         <Submit loading={loadingState}>{loadingState ? "Enviando..." : "Entrar"}</Submit>
